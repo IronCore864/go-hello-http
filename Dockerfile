@@ -6,5 +6,5 @@ RUN go build -o hello
 FROM alpine
 WORKDIR /app
 COPY --from=build-env /go/src/github.com/ironcore864/go-hello-http/hello /app/
-ENTRYPOINT app
+CMD ["./hello"]
 EXPOSE 8080/tcp
