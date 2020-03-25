@@ -1,7 +1,7 @@
 FROM golang:alpine AS build-env
 WORKDIR $GOPATH/src/github.com/ironcore864/go-hello-http
 COPY . .
-RUN go build -o hello
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o hello
 
 FROM alpine
 WORKDIR /app
