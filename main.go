@@ -19,4 +19,5 @@ func helloServer(w http.ResponseWriter, r *http.Request) {
 		name = "world"
 	}
 	fmt.Fprintf(w, fmt.Sprintf("Hello, %s!", name))
+	log.Println(fmt.Sprintf("Hello, %s!", name))
 }
