@@ -4,14 +4,20 @@ os: linux
 
 language: go
 
+go:
+  - 1.10.x
+  - 1.11.x
+  - 1.12.x
+  - 1.13.x
+
 services:
   - docker
 
-before_install:
-  - docker build -t ironcore864/go-hello-http .
+script:
+  - go test -v ./...
 
 deploy:
   provider: script
-  script: bash travis/docker_push
+  script: bash travis/docker_build_push.sh
   on:
     branch: master
