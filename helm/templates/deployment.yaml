@@ -17,8 +17,5 @@ spec:
       containers:
       - name: helloworld
         image: ironcore864/go-hello-http
-        env:
-        - name: EPSAGON_TOKEN
-          value: {{ .Values.epsagonToken }}
         ports:
         - containerPort: 8080
