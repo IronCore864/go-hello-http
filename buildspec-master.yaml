@@ -6,9 +6,10 @@ phases:
      golang: 1.14	
   build:	
     commands:	
+      - git checkout master
+      - git status
       - go build	
       - go test ./...	
-      - git status
       - git config --global user.name "AWS CodeBuild"
       - git config --global user.email "MY_NAME@example.com"
       - VERSION=`cat version`
