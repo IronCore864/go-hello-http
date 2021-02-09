@@ -12,7 +12,7 @@ services:
 
 script:
   - go test -v ./...
-  - travis/docker_build_push.sh
+  - bash travis/docker_build_push.sh
 
 deploy:
   provider: script
