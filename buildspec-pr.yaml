@@ -6,10 +6,10 @@ phases:
      golang: 1.15
   pre_build:
     commands:
-      - aws --version
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/u7w2h8y6
   build:
     commands:
+      - ls -al
       - go build
       - go test ./...
       - export IMAGE_TAG=`cat version`
