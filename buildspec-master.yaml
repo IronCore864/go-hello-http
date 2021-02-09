@@ -1,12 +1,12 @@
 version: 0.2	
 
+env:
+  git-credential-helper: yes
+
 phases:	
   install:
     runtime-versions: 	
       golang: 1.14	
-    commands:
-      - git config --global credential.helper '!aws codecommit credential-helper $@'
-      - git config --global credential.UseHttpPath true
   build:	
     commands:	
       - git checkout master
