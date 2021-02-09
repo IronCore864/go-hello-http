@@ -11,7 +11,7 @@ phases:
     commands:	
       - go build	
       - go test ./...	
-      - export IMAGE_TAG=`cat version`	
+      - export IMAGE_TAG=$(cat version)
       - docker build -t 391996659322.dkr.ecr.eu-central-1.amazonaws.comgo-hello-http:$IMAGE_TAG .	
   post_build:	
     commands:	
