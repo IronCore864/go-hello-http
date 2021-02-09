@@ -1,17 +1,18 @@
 version: 0.2	
 
 phases:	
-  install: 	
-   runtime-versions: 	
-     golang: 1.14	
+  install:
+    runtime-versions: 	
+      golang: 1.14	
+    commands:
+      - git config --global credential.helper '!aws codecommit credential-helper $@'
+      - git config --global credential.UseHttpPath true
   build:	
     commands:	
       - git checkout master
       - git status
       - go build	
       - go test ./...	
-      - git config --global user.name "AWS CodeBuild"
-      - git config --global user.email "MY_NAME@example.com"
       - VERSION=`cat version`
       - git tag $VERSION
       - git push origin $VERSION
