@@ -14,6 +14,9 @@ script:
   - go test -v ./...
   - bash travis/docker_build_push.sh
 
-deploy:
-  provider: script
-  script: bash travis/docker_build_push.sh
+before_deploy:
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - export GIT_TAG=$(cat version)
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+  - git push -q https://github.com/ironcore864/go-hello-http --tags
