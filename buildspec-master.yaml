@@ -8,3 +8,8 @@ phases:
     commands:	
       - go build	
       - go test ./...	
+      - VERSION=`cat version`
+      - git tag $VERSION
+      - git push origin $VERSION
+      - sed -i "/appVersion:/c\appVersion: ${VERSION}" helm/Chart.yaml
+      - git add . && git commit -m 'bump chart version' && git push origin master
