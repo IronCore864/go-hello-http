@@ -12,9 +12,8 @@ services:
 
 script:
   - go test -v ./...
+  - travis/docker_build_push.sh
 
 deploy:
   provider: script
   script: bash travis/docker_build_push.sh
-  on:
-    branch: master
