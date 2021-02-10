@@ -5,7 +5,6 @@ on:
 name: Build and Tag
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -18,28 +17,6 @@ jobs:
         run: go build -v ./...
       - name: Test
         run: go test -v ./...
-
-  deploy:
-    name: Build Docker Image
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Get version
-        run: echo "VERSION=$(cat version)" >> $GITHUB_ENV
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-hello-http:${{ env.VERSION }}
-
   tag:
     name: Tag
     needs: [build, deploy]
@@ -49,7 +26,23 @@ jobs:
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          custom_tag: ${{ env.VERSION }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_prefix: ""
+  deploy:
+    name: Build Docker Image
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-hello-http:${{ steps.tag_version.outputs.new_tag }}
