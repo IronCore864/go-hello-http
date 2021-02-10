@@ -1,3 +1,3 @@
 # Helloworld in Golang with HTTP
 
-A example with helm chart, drone ci and argocd.
+![Build and Tag](https://github.com/IronCore864/go-hello-http/workflows/Build%20and%20Tag/badge.svg?branch=master)
