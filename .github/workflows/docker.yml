@@ -19,7 +19,7 @@ jobs:
         run: go test -v ./...
   tag:
     name: Tag
-    needs: [build, deploy]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,7 +31,7 @@ jobs:
           tag_prefix: ""
   deploy:
     name: Build Docker Image
-    needs: build
+    needs: [build, tag]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
