@@ -34,7 +34,7 @@ jobs:
           tag_prefix: ""
   build:
     name: Build Docker Image
-    needs: [test, tag]
+    needs: [tag]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -49,3 +49,23 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-hello-http:${{needs.tag.outputs.new_tag}}
+  deploy:
+    name: GitOps Deploy
+    needs: [tag, build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: https://github.com/IronCore864/charts.git
+    - name: Create local changes
+      run: |
+        sed -i "s/^appVersion:.*$/appVersion: ${{needs.tag.outputs.new_tag}}/g" go-hello-http/Chart.yaml
+    - name: Commit files
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git commit -m "Bump appVersion" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
