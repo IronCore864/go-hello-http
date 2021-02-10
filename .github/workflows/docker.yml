@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-hello-http:${{ env.VERSION }}
+          tags: "${{ secrets.DOCKERHUB_USERNAME }}/go-hello-http:${{ env.VERSION }}"
 
   tag:
     name: Tag
