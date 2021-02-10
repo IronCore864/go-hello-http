@@ -56,7 +56,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: https://github.com/IronCore864/charts.git
+        repository: ironcore864/charts
     - name: Create local changes
       run: |
         sed -i "s/^appVersion:.*$/appVersion: ${{needs.tag.outputs.new_tag}}/g" go-hello-http/Chart.yaml
