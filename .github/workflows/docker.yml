@@ -49,13 +49,7 @@ jobs:
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.1
-        with:
-          github_token: ${{ secrets.GHA_TOKEN }}
-      - name: Create a GitHub release
-        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GHA_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          release_name: Release ${{ steps.tag_version.outputs.new_tag }}
-          body: ${{ steps.tag_version.outputs.changelog }}
+          custom_tag: ${{ env.VERSION }}
