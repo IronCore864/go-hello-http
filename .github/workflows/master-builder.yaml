@@ -56,17 +56,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        repository: ironcore864/charts
+        persist-credentials: false
+        repository: IronCore864/charts
     - name: Create local changes
       run: |
         sed -i "s/^appVersion:.*$/appVersion: ${{needs.tag.outputs.new_tag}}/g" go-hello-http/Chart.yaml
     - name: Commit files
       run: |
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
+        git config --local user.email "guotiexin@gmail.com"
+        git config --local user.name "IronCore864"
         git commit -m "Bump appVersion" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
-        repository: ironcore864/charts
+        repository: IronCore864/charts
         github_token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
