@@ -21,6 +21,7 @@ jobs:
 
   deploy:
     name: Build Docker Image
+    need: build
     runs-on: ubuntu-latest
 
     steps:
@@ -40,8 +41,7 @@ jobs:
 
   tag:
     name: Tag
-    runs-on: ubuntu-latest
-    steps:
+    need: [build, deploy]
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         id: tag_version
