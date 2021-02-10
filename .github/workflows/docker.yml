@@ -22,6 +22,8 @@ jobs:
     name: Tag
     needs: [test]
     runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.tag_version.outputs.new_tag }}
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
@@ -46,4 +48,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-hello-http:${{ jobs.tag.steps.tag_version.outputs.new_tag }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-hello-http:${{needs.tag.outputs.new_tag}}
