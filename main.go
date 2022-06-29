@@ -9,7 +9,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", helloServer)
-	log.Println("Server started on 8080.")
+	log.Println("Server started on 8080..")
 	http.ListenAndServe(":8080", nil)
 }
 
