@@ -20,5 +20,5 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           repository: ironcore864/gitops-argocd
-          # github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.MY_GH_TOKEN }}
           force: true
