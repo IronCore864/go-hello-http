@@ -12,8 +12,12 @@ jobs:
       - name: Commit files
         run: |
           sed -i "s/^appVersion: .*$/appVersion: "2"/" go-hello-http/Chart.yaml
-      - name: Commit & Push changes
-        uses: actions-js/push@master
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Add changes"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.MY_GH_TOKEN }}
           repository: ironcore864/gitops-argocd
+          force: true
