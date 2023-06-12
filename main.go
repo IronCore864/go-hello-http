@@ -18,6 +18,6 @@ func helloServer(w http.ResponseWriter, r *http.Request) {
 	if name == "" {
 		name = "world"
 	}
-	fmt.Fprintf(w, fmt.Sprintf("Hello, %s! Version 2", name))
-	log.Println(fmt.Sprintf("Hello, %s! Version 2", name))
+	fmt.Fprintf(w, fmt.Sprintf("Hello, %s! 0.0.3", name))
+	log.Println(fmt.Sprintf("Hello, %s! 0.0.3", name))
 }
