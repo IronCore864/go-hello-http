@@ -18,7 +18,6 @@ func helloServer(w http.ResponseWriter, r *http.Request) {
 	if name == "" {
 		name = "world"
 	}
-	fmt.Fprintf(w, fmt.Sprintf("Hello, %s! 0.0.7", name))
 	log.Println(fmt.Sprintf("Hello, %s! 0.0.7", name))
 	
 	w.Header().Set("Content-Type", "application/json")
