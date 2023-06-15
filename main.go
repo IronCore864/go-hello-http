@@ -20,4 +20,11 @@ func helloServer(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintf(w, fmt.Sprintf("Hello, %s! 0.0.7", name))
 	log.Println(fmt.Sprintf("Hello, %s! 0.0.7", name))
+	
+	w.Header().Set("Content-Type", "application/json")
+	response := []byte("Hello, world!")
+	_, err := w.Write(response)
+	if err != nil {
+        	// Handle the error gracefully
+	}
 }
