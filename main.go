@@ -18,10 +18,10 @@ func helloServer(w http.ResponseWriter, r *http.Request) {
 	if name == "" {
 		name = "world"
 	}
-	log.Println(fmt.Sprintf("Hello, %s! 0.0.7", name))
+	log.Println(fmt.Sprintf("Hello, %s!", name))
 	
 	w.Header().Set("Content-Type", "application/json")
-	response := []byte("Hello, world!")
+	response := []byte("{\"test\": \"Hello, world!\"}")
 	_, err := w.Write(response)
 	if err != nil {
         	// Handle the error gracefully
