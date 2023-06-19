@@ -15,9 +15,9 @@ jobs:
         with:
           go-version: 1.20.5
       - name: Test
-        run: go test ./...
+        run: make test
       - name: Build
-        run: go build ./...
+        run: make build
 
   tag:
     name: Tag
