@@ -16,7 +16,7 @@ func main() {
 func helloServer(w http.ResponseWriter, r *http.Request) {
 	name := os.Getenv("NAME")
 	if name == "" {
-		name = "v0.0.15"
+		name = "v0.0.16"
 	}
 	log.Println(fmt.Sprintf("Hello, %s!", name))
 	
